@@ -319,14 +319,14 @@ button {
   display: grid;
   place-items: center;
   font-size: 30px;
-  color: #009cbb;
+  color: #18A7B9;
   margin-bottom: 30px;
 }
 .icon-1 {
-  color: #009ac0;
+  color: #18A7B9;
 }
 .icon-2 {
-  color: #0879a4;
+  color: ;
 }
 .feature-card h3 {
   font-size: 18px;
@@ -340,14 +340,26 @@ button {
   color: #818181;
 }
 .feature-heading {
-  border-right: 1px solid #91b9cb;
-  padding-right: 28px;
+  position: relative;
+  padding-left: 0px;
   text-align: center;
   font-family: "Tajawal", sans-serif;
   font-size: 33px;
-  line-height: 1.6;
+  font-weight: 600;
   margin: 0;
   color: #111;
+}
+
+.feature-heading::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 200px; 
+  width: 2px;
+  background: linear-gradient(180deg, #002254, #5dcbe1);
+  border-radius: 10px;
 }
 .feature-heading span,
 .section-title span,
@@ -644,6 +656,7 @@ button {
   grid-template-columns: 0.1fr 1fr;
   gap: 60px;
   align-items: center;
+
 }
 .faq-list {
   display: flex;
@@ -700,6 +713,8 @@ button {
   font-size: 58px;
   line-height: 1.25;
   margin: 0;
+      font-weight: 600;
+
   color: #090909;
 }
 .faq-title span {

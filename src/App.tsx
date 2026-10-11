@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type PointerEvent } from 'react'
 import { geoDistance, geoOrthographic, geoPath } from 'd3-geo'
 import { feature, mesh } from 'topojson-client'
 import worldData from 'world-atlas/countries-110m.json'
-import { Award, Blocks, Clock3, Headset, Layers, Mail, MapPin, Phone, UsersRound, Wrench } from 'lucide-react'
+import { ArrowRight, Award, Blocks, Clock3, Headset, Layers, Mail, MapPin, Phone, UsersRound, Wrench } from 'lucide-react'
 import type { CSSProperties } from 'react'
 import deepseekLogo from './assets/orbit-image-4.png'
 import dokployLogo from './assets/orbit-image-10.png'
@@ -20,9 +20,9 @@ const countryFeatures = feature(topology, topology.objects.countries).features
 const countryBorders = mesh(topology, topology.objects.countries, (a: any, b: any) => a !== b)
 
 const features = [
-  { icon: Blocks, title: 'الخدمــات التقنيـــة', text: 'من البناء إلى التشغيل — نطوّر تطبيقاتك المخصصة ونتولى إدارة خوادمك.' },
-  { icon: Layers, title: 'البنيــة التحتيــة', text: 'خوادم Linux وWindows بإدارة كاملة، أو تتركها لنا — Shared Hosting وVPS وVDS وDedicated.' },
-  { icon: Wrench, title: 'الأنظمة الجـــاهزة', text: 'منظومات جاهزة تُنصَّب داخل خادمك — مساعد ذكي، أتمتة، نموذج لغة خاص، أو سحابة ملفات.' },
+  { icon: Blocks, title: 'الخدمــات التقنيـــة', text: 'من البناء إلى التشغيل — نطوّر تطبيقاتك المخصصة ونتولى إدارة خوادمك.', hoverDetails: ['تطوير تطبيقات مخصصة', 'إدارة الخوادم من البناء إلى التشغيل'] },
+  { icon: Layers, title: 'البنيــة التحتيــة', text: 'خوادم Linux وWindows بإدارة كاملة، أو تتركها لنا — Shared Hosting وVPS وVDS وDedicated.', hoverDetails: ['Cloud VPS / VDS / Dedicated', 'Shared Hosting Linux وWindows', 'نسخ احتياطي وحماية', 'مراقبة استباقية', 'مساعد ذكي خاص — OpenClaw', 'أتمتة وتكاملات — n8n', 'نموذج لغة محلي — DeepSeek'] },
+  { icon: Wrench, title: 'الأنظمة الجـــاهزة', text: 'منظومات جاهزة تُنصَّب داخل خادمك — مساعد ذكي، أتمتة، نموذج لغة خاص، أو سحابة ملفات.', hoverDetails: ['مساعد ذكي خاص — OpenClaw', 'أتمتة وتكاملات — n8n', 'نموذج لغة محلي — DeepSeek', 'سحابة ملفات'] },
 ]
 
 const orbitItems = [
@@ -140,13 +140,18 @@ function CoverageMap() {
 export default function App() {
   const [openFaq, setOpenFaq] = useState(1)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeNav, setActiveNav] = useState('home')
   const [planOffset, setPlanOffset] = useState(0)
   return <div dir="rtl" lang="ar" className="page">
     <header className="site-header">
       <a className="brand" href="#home" aria-label="الرئيسية"><span className="brand-word">logo</span><span className="brand-mark">L</span></a>
       <button className="menu-toggle" aria-label="فتح القائمة" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>☰</button>
       <nav className={menuOpen ? 'nav-links open' : 'nav-links'}>
-        <a className="active" href="#home">الصفحة الرئيسية</a><a href="#features"> مميزاتنــا</a><a href="#pricing">خدماتنــا</a><a href="#faq"> الاسئلــة الشائعــة </a><a href="#coverage">تغطيتنــا العالميــة </a>
+        <a className={activeNav === 'home' ? 'active' : undefined} aria-current={activeNav === 'home' ? 'page' : undefined} href="#home" onClick={() => { setActiveNav('home'); setMenuOpen(false) }}>الصفحة الرئيسية</a>
+        <a className={activeNav === 'features' ? 'active' : undefined} aria-current={activeNav === 'features' ? 'page' : undefined} href="#features" onClick={() => { setActiveNav('features'); setMenuOpen(false) }}>مميزاتنــا</a>
+        <a className={activeNav === 'pricing' ? 'active' : undefined} aria-current={activeNav === 'pricing' ? 'page' : undefined} href="#pricing" onClick={() => { setActiveNav('pricing'); setMenuOpen(false) }}>خدماتنــا</a>
+        <a className={activeNav === 'faq' ? 'active' : undefined} aria-current={activeNav === 'faq' ? 'page' : undefined} href="#faq" onClick={() => { setActiveNav('faq'); setMenuOpen(false) }}>الاسئلــة الشائعــة</a>
+        <a className={activeNav === 'coverage' ? 'active' : undefined} aria-current={activeNav === 'coverage' ? 'page' : undefined} href="#coverage" onClick={() => { setActiveNav('coverage'); setMenuOpen(false) }}>تغطيتنــا العالميــة</a>
       </nav>
       <div className="account-actions"><a href="#contact" className="login">سجل دخول</a><a href="#contact" className="signup">إنشاء حساب</a></div>
     </header>
@@ -156,7 +161,7 @@ export default function App() {
         <div className="hero-copy">
           <h1>بنية تحتية قويـة..<br/><span>تدّعــم <b>نُمـــو التقنيــة</b></span></h1>
           <p>حلول تقنية متكاملة تجمع بين الاستضافة عالية الأداء، والبنية التحتية الرقمية، وتقنيات الذكاء الاصطناعي لدعم أعمالك بكفاءة واستمرارية.</p>
-          <div className="hero-actions"><a className="outline-button" href="#contact">←　تواصل معانا</a><a className="gradient-button" href="#pricing">احجــــــز عرضــــــاً</a></div>
+          <div className="hero-actions"><a className="gradient-button" href="#pricing">احجــــــز عرضــــــاً</a><a className="outline-button" href="#contact">تواصل معنــــــا</a></div>
         </div>
         <div className="orbit-scene" role="img" aria-label="رسم توضيحي لشبكة الاستضافة مع شعارات الأدوات التقنية">
           <div className="orbit-canvas" aria-hidden="true">
@@ -189,12 +194,15 @@ export default function App() {
 
       <section id="features" className="features-section">
         <div className="feature-grid">
-          {features.map((f,i)=>{const Icon=f.icon;return <article className={`feature-card icon-${i}`} key={f.title}><span className="feature-icon"><Icon size={36} strokeWidth={1.8} aria-hidden="true" /></span><h3>{f.title}</h3><p>{f.text}</p></article>})}
+          {features.map((f,i)=>{const Icon=f.icon;return <article className={`feature-card icon-${i}`} key={f.title} tabIndex={0} aria-label={f.title}>
+            <span className="feature-icon"><Icon size={50} strokeWidth={1.5} aria-hidden="true" /></span><h3>{f.title}</h3><p>{f.text}</p>
+            <div className="feature-card-hover"><ul>{f.hoverDetails.map(detail=><li key={detail}>{detail}</li>)}</ul><ArrowRight className="feature-card-arrow" size={30} aria-hidden="true" /></div>
+          </article>})}
           <h2 className="feature-heading">مميزاتنــا <span>تصنـــع<br/>الفرق</span></h2>
         </div>
         <div className="marquee"><div className="marquee-track">{Array.from({length:4},(_,i)=><div className="marquee-group" key={i}><span>حلول تقنية تخلي شغلك أسهل</span><b>✦</b><span>بنيتك الرقمية علينا، ونموك عليك</span><b>✦</b><span>استضافة تواكب طموحك</span><b>✦</b></div>)}</div></div>
       </section>
-
+      
       <section id="pricing" className="pricing-section">
         <h2 className="section-title"><span>استضافة</span> VPS والخــوادم المخصصـــــة</h2>
         <div className="carousel-controls"><button onClick={()=>setPlanOffset((planOffset+2)%3)} aria-label="السابق">‹</button><button onClick={()=>setPlanOffset((planOffset+1)%3)} aria-label="التالي">›</button></div>
