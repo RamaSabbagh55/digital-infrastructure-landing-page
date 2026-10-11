@@ -1,0 +1,323 @@
+@media (min-width: 701px) {
+  .hero-section {
+    min-height: 700px;
+  }
+  .hero-copy {
+    order: 0;
+    justify-self: start;
+  }
+  .orbit-scene {
+    order: 1;
+    justify-self: end;
+  }
+  .feature-heading {
+    order: -1;
+  }
+}
+
+/* Hero satellites use fixed radii around one shared center; icons stay upright while orbiting. */
+.hero-section {
+  padding-inline: clamp(18px, 4.5vw, 58px);
+}
+.orbit-scene {
+  touch-action: auto;
+  cursor: default;
+  container-type: size;
+}
+.orbit-canvas {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+.orbit-lines {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.orbit-dot-layer {
+  position: absolute;
+  inset: 0;
+}
+.orbit-dot-track,
+.orbiting-element {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--orbit-diameter);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) rotate(var(--orbit-phase));
+  animation: orbit-revolution 20s linear infinite;
+  will-change: transform;
+}
+.orbit-dot {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #36cbe1;
+  opacity: 0.62;
+}
+.orbiting-element {
+  z-index: 1;
+}
+.orbit-badge-anchor {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 46px;
+  height: 46px;
+  transform: translate(-50%, -50%);
+}
+.orbit-badge-counter {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  transform: rotate(calc(var(--orbit-phase) * -1));
+  animation: orbit-badge-counter 36s linear infinite;
+}
+.orbit-badge {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid #d8f0f5;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 3px 10px #143b4d20;
+}
+.orbit-badge img {
+  display: block;
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+    margin: auto;
+
+}
+.badge-deepseek,
+.badge-infinity {
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.badge-deepseek img,
+.badge-infinity img {
+  width: 84%;
+  height: 84%;
+}
+.badge-dokploy {
+  background: #fff;
+}
+.badge-dokploy img {
+  width: 84%;
+  height: 84%;
+  object-fit: cover;
+}
+
+.badge-n8n {
+  background: #7838f5;
+}
+.badge-coolify img {
+  width: 58%;
+  height: 58%;
+}
+ .badge-n8n img {
+  width: 76%;
+  height: 80%;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  margin: auto;
+}
+.badge-openclaw {
+  border-color: #111;
+  background: #050505;
+}
+.badge-openclaw img {
+  width: 84%;
+  height: 84%;
+  object-fit: cover;
+}
+.badge-gitlab {
+  width: 38px;
+  height: 38px;
+  border-color: #f9aa21;
+  background: #f9aa21;
+}
+.badge-gitlab img {
+  width: 62%;
+  height: 62%;
+}
+.badge-deepseek img,
+.badge-openclaw img,
+.badge-n8n img {
+  transform: scaleX(-1);
+}
+.host-core {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  width: 22.85%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+}
+.host-core img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+@keyframes orbit-revolution {
+  from {
+    transform: translate(-50%, -50%) rotate(var(--orbit-phase));
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(calc(var(--orbit-phase) + 360deg));
+  }
+}
+@keyframes orbit-badge-counter {
+  from { transform: rotate(calc(var(--orbit-phase) * -1)); }
+  to {
+    transform: rotate(calc(var(--orbit-phase) * -1 - 360deg));
+  }
+}
+
+/* Lock question rows to the intended RTL order so the expand control stays at the right edge. */
+.faq-item button {
+  direction: rtl;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.faq-item button > span:last-child {
+  flex: 1;
+}
+.faq-item button:focus-visible {
+  outline: 2px solid #076f9e;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-dot-track,
+  .orbiting-element,
+  .orbit-badge-counter {
+    animation-duration: 120s;
+  }
+}
+
+@media (min-width: 1281px) {
+  .hero-section {
+    padding-inline: max(0px, calc(4.5vw - (100vw - 1280px) / 2));
+  }
+}
+@media (max-width: 1000px) {
+  .hero-section {
+    padding-inline: 24px;
+  }
+  .feature-grid {
+    row-gap: 24px;
+  }
+}
+@media (max-width: 700px) {
+  .hero-section {
+    padding-inline: 18px;
+  }
+  .feature-heading {
+    margin-bottom: 11px;
+  }
+  .plan-card.featured {
+    padding-bottom: 47px;
+  }
+}
+@media (hover: hover) {
+  .feature-card {
+    transition:
+      transform 0.24s ease,
+      border-color 0.24s ease,
+      box-shadow 0.24s ease;
+  }
+  .feature-card:hover {
+    transform: translateY(-6px);
+    border-color: #b9e6ef;
+    box-shadow: 0 12px 26px #143b4d1b;
+  }
+}
+.feature-card:focus-within {
+  border-color: #b9e6ef;
+  box-shadow: 0 0 0 3px #5dcbe133;
+}
+.feature-heading {
+  position: relative;
+  padding-bottom: 15px;
+}
+.feature-heading::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  width: 64px;
+  height: 3px;
+  border-radius: 3px;
+  transform: translateX(50%);
+  background: linear-gradient(90deg, #5dcbe1, #076f9e);
+}
+
+.stat-icon {
+  display: grid;
+  place-items: center;
+}
+.footer-brand img {
+  display: block;
+  width: 132px;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+.socials a {
+  display: grid;
+  place-items: center;
+}
+.footer-bottom span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  direction: rtl;
+}
+
+/* Keep the raised premium card's action on the same baseline as its siblings. */
+.plan-card {
+  display: flex;
+  flex-direction: column;
+}
+.plan-card.featured {
+  padding-bottom: 39px;
+}
+.plan-cta {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+.price span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
+}
+.currency-symbol {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  vertical-align: middle;
+}
