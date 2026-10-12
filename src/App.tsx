@@ -4,15 +4,12 @@ import { feature, mesh } from "topojson-client";
 import worldData from "world-atlas/countries-110m.json";
 import {
   ArrowRight,
-  Award,
   Blocks,
-  Clock3,
   Headset,
   Layers,
   Mail,
   MapPin,
   Phone,
-  UsersRound,
   Wrench,
   Landmark,
   AlarmClock,
@@ -257,15 +254,15 @@ function CoverageMap() {
     ]);
   };
   const locations = [
-    { point: [103.8, 1.3] as [number, number], label: "سنغافورة" },
-    { point: [139.7, 35.7] as [number, number], label: "اليابان" },
-    { point: [13.4, 52.5] as [number, number], label: "ألمانيا" },
-    { point: [-0.1, 51.5] as [number, number], label: "بريطانيا" },
-    { point: [46.7, 24.7] as [number, number], label: "السعودية" },
-    { point: [-74, 40.7] as [number, number], label: "نيويورك" },
-    { point: [-79.4, 43.7] as [number, number], label: "كندا" },
-    { point: [-46.6, -23.5] as [number, number], label: "البرازيل" },
-    { point: [77.2, 28.6] as [number, number], label: "الهند" },
+    { point: [103.8, 1.3] as [number, number], continent: "آسيا", label: "سنغافورة" },
+    { point: [139.7, 35.7] as [number, number], continent: "آسيا", label: "اليابان" },
+    { point: [13.4, 52.5] as [number, number], continent: "أوروبا", label: "ألمانيا" },
+    { point: [-0.1, 51.5] as [number, number], continent: "أوروبا", label: "بريطانيا" },
+    { point: [46.7, 24.7] as [number, number], continent: "آسيا", label: "السعودية" },
+    { point: [-74, 40.7] as [number, number], continent: "أمريكا الشمالية", label: "نيويورك" },
+    { point: [-79.4, 43.7] as [number, number], continent: "أمريكا الشمالية", label: "كندا" },
+    { point: [-46.6, -23.5] as [number, number], continent: "أمريكا الجنوبية", label: "البرازيل" },
+    { point: [77.2, 28.6] as [number, number], continent: "آسيا", label: "الهند" },
   ];
   const center: [number, number] = [-rotation[0], -rotation[1]];
   return (
@@ -298,7 +295,7 @@ function CoverageMap() {
         </defs>
         <path
           d="M40 530 A600 520 0 0 1 1240 530 Z"
-          fill="#5dcbe1"
+          fill="#000000"
           opacity=".4"
           filter="url(#glow)"
         />
@@ -316,7 +313,7 @@ function CoverageMap() {
             strokeOpacity=".8"
             strokeWidth=".8"
           />
-          {locations.map(({ point, label }) => {
+          {locations.map(({ point, continent, label }) => {
             const position =
               geoDistance(point, center) < Math.PI / 2
                 ? projection(point)
@@ -333,25 +330,37 @@ function CoverageMap() {
                   strokeWidth="2"
                 />
                 <circle cy="-1" r="4" fill="#e6fbff" />
-                <g transform="translate(15 10)">
+                <g transform="translate(-56 25)">
                   <rect
-                    width="92"
-                    height="28"
+                    width="112"
+                    height="42"
                     rx="8"
                     fill="#fff"
                     opacity=".96"
                   />
                   <text
-                    x="46"
-                    y="19"
+                    x="56"
+                    y="16"
+                    textAnchor="middle"
+                    fontSize="8"
+                    fill="#607987"
+                    direction="rtl"
+                  >
+                    {continent}
+                  </text>
+                  <text
+                    x="56"
+                    y="32"
                     textAnchor="middle"
                     fontSize="10"
+                    fontWeight="700"
                     fill="#183044"
                     direction="rtl"
                   >
                     {label}
                   </text>
-                  <circle cx="80" cy="14" r="4" fill="#43d69b" />
+                  <circle cx="98" cy="11" r="5" fill="#63FEA4"    stroke="#D9D9D9"
+  strokeWidth="2"/>
                 </g>
               </g>
             );
@@ -375,6 +384,23 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("home");
   const [planOffset, setPlanOffset] = useState(0);
+  useEffect(() => {
+    const sectionIds = ["home", "features", "pricing", "coverage", "faq"];
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => section !== null);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const current = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (current) setActiveNav(current.target.id);
+      },
+      { rootMargin: "-20% 0px -60% 0px", threshold: [0, 0.1, 0.25, 0.5] },
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
   return (
     <div dir="rtl" lang="ar" className="page">
       <header className="site-header">
@@ -424,17 +450,7 @@ export default function App() {
           >
             خدماتنــا
           </a>
-          <a
-            className={activeNav === "faq" ? "active" : undefined}
-            aria-current={activeNav === "faq" ? "page" : undefined}
-            href="#faq"
-            onClick={() => {
-              setActiveNav("faq");
-              setMenuOpen(false);
-            }}
-          >
-            الاسئلــة الشائعــة
-          </a>
+     
           <a
             className={activeNav === "coverage" ? "active" : undefined}
             aria-current={activeNav === "coverage" ? "page" : undefined}
@@ -446,8 +462,28 @@ export default function App() {
           >
             تغطيتنــا العالميــة
           </a>
+
+               <a
+            className={activeNav === "faq" ? "active" : undefined}
+            aria-current={activeNav === "faq" ? "page" : undefined}
+            href="#faq"
+            onClick={() => {
+              setActiveNav("faq");
+              setMenuOpen(false);
+            }}
+          >
+            الاسئلــة الشائعــة
+          </a>
+          <div className="account-actions mobile-account-actions">
+            <a href="#contact" className="login">
+              سجل دخول
+            </a>
+            <a href="#contact" className="signup">
+              إنشاء حساب
+            </a>
+          </div>
         </nav>
-        <div className="account-actions">
+        <div className="account-actions desktop-account-actions">
           <a href="#contact" className="login">
             سجل دخول
           </a>
@@ -615,7 +651,7 @@ export default function App() {
               <span>
                 تصنـــع
                 <br />
-                الفرق
+                {" "}الفرق
               </span>
             </h2>
           </div>
@@ -707,13 +743,14 @@ export default function App() {
           <div className="plus-pattern" />
           <h2 className="section-title">
             <span className="gradient-text">
-              9 مناطق و11 موقعاً بتغطية عالمية
+              9 مناطق | 11 موقعـــاً | تغطية عالميـــة
             </span>
           </h2>
           <p className="coverage-subtitle">
             اختر موقع الاستضافة الأقرب إلى جمهورك واستفد من زمن استجابة منخفض{" "}
-            <span>أينما كان عملاؤك. لعملائك وأداء موثوق </span>{" "}
+            <span> وأداء موثوق أينما كان عملاؤك. </span>{" "}
           </p>
+          <div className=" mb-14"></div>
           <CoverageMap />
           <div className="stats-grid">
             <article>
