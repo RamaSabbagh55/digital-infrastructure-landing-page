@@ -325,9 +325,27 @@ button {
 .icon-1 {
   color: #18A7B9;
 }
-.icon-2 {
-  color: ;
+
+.outline-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid currentColor;
+  transition: border-style 0.2s ease;
 }
+
+.button-arrow {
+  transition: transform 0.3s ease;
+}
+
+.outline-button:hover {
+  border-style: dashed;
+}
+
+.outline-button:hover .button-arrow {
+  transform: translateX(-4px);
+}
+
 .feature-card h3 {
   font-size: 18px;
   margin: 0 0 12px;
@@ -367,6 +385,13 @@ button {
   background: linear-gradient(100deg, #002254, #5dcbe1);
   color: transparent;
   background-clip: text;
+}
+.gradient-text {
+  background: linear-gradient(90deg, #002254, #5dcbe1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 .marquee {
   position: absolute;
@@ -416,7 +441,7 @@ button {
   font-family: "Tajawal", "IBM Plex Sans Arabic", sans-serif;
   font-weight: 800;
   font-size: 34px;
-  line-height: 1.4;
+  line-height: 1;
   margin: 0 auto 42px;
   color: #131519;
 }
@@ -573,6 +598,7 @@ button {
   color: #8a8a8a;
   margin: auto;
   max-width: 700px;
+  line-height: 80px;
 }
 .map-shell {
   height: 450px;
@@ -611,6 +637,17 @@ button {
   grid-template-columns: repeat(4, 1fr);
   gap: 22px;
 }
+@media (max-width: 700px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 .stats-grid article {
   height: 150px;
   border-radius: 16px;
@@ -628,25 +665,36 @@ button {
   font:
     800 36px Arial,
     sans-serif;
-  direction: ltr;
+  direction: rtl;
   color: #090a0d;
+  text-align: right;
 }
 .stats-grid small {
   grid-column: 1/-1;
   text-align: right;
   color: #888;
   font-size: 11px;
+  place-items: left;
 }
 .stat-icon {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background: #cdebf4;
   color: #057eaa;
   font-size: 21px;
   display: grid;
-  place-items: center;
+  place-items: left;
+
 }
+
+.contact-link {
+  display:inline-flex;
+  align-items: center;
+  gap: 18px; /* المسافة بين السهم والزر */
+}
+
+
 .faq-section {
   max-width: 1280px;
   margin: auto;
@@ -1013,7 +1061,6 @@ button {
   }
   .coverage-subtitle {
     font-size: 12px;
-    line-height: 1.8;
   }
   .map-shell {
     height: 260px;
@@ -1097,4 +1144,10 @@ button {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+.spec-icon {
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
 }
