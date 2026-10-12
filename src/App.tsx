@@ -383,7 +383,15 @@ export default function App() {
   const [openFaq, setOpenFaq] = useState(1);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("home");
-  const [planOffset, setPlanOffset] = useState(0);
+  const [planOffset, setPlanOffset] = useState(() =>
+    window.matchMedia("(max-width: 700px)").matches ? 1 : 0,
+  );
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 700px)");
+    const syncFeaturedPlan = () => setPlanOffset(mobileQuery.matches ? 1 : 0);
+    mobileQuery.addEventListener("change", syncFeaturedPlan);
+    return () => mobileQuery.removeEventListener("change", syncFeaturedPlan);
+  }, []);
   useEffect(() => {
     const sectionIds = ["home", "features", "pricing", "coverage", "faq"];
     const sections = sectionIds
@@ -391,6 +399,11 @@ export default function App() {
       .filter((section): section is HTMLElement => section !== null);
     const observer = new IntersectionObserver(
       (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
         const current = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
@@ -410,11 +423,15 @@ export default function App() {
         </a>
         <button
           className="menu-toggle"
-          aria-label="فتح القائمة"
+          aria-label={menuOpen ? "إغلاق القائمة" : "فتح القائمة"}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          ☰
+          <span className={menuOpen ? "menu-icon is-open" : "menu-icon"} aria-hidden="true">
+            <i />
+            <i />
+            <i />
+          </span>
         </button>
         <nav className={menuOpen ? "nav-links open" : "nav-links"}>
           <a
@@ -494,7 +511,7 @@ export default function App() {
       </header>
 
       <main>
-        <section id="home" className="hero-section">
+        <section id="home" className="hero-section scroll-reveal">
           <div className="hero-copy">
             <h1>
               بنية تحتية قويـة..
@@ -615,7 +632,7 @@ export default function App() {
           </div>
         </section>
 
-        <section id="features" className="features-section">
+        <section id="features" className="features-section scroll-reveal">
           <div className="feature-grid">
             {features.map((f, i) => {
               const Icon = f.icon;
@@ -671,7 +688,7 @@ export default function App() {
           </div>
         </section>
 
-        <section id="pricing" className="pricing-section">
+        <section id="pricing" className="pricing-section scroll-reveal">
           <h2 className="section-title">
             <span>استضافة</span>{" "}
             <span className="gradient-text">VPS والخــوادم المخصصـــــة</span>
@@ -739,7 +756,7 @@ export default function App() {
           </div>
         </section>
 
-        <section id="coverage" className="coverage-section">
+        <section id="coverage" className="coverage-section scroll-reveal">
           <div className="plus-pattern" />
           <h2 className="section-title">
             <span className="gradient-text">
@@ -794,7 +811,7 @@ export default function App() {
           </div>
         </section>
 
-        <section id="faq" className="faq-section">
+        <section id="faq" className="faq-section scroll-reveal">
           <div className="faq-title">
             <h2>
               الأسئلــــــة
@@ -829,25 +846,22 @@ export default function App() {
       <footer id="contact" className="site-footer">
         <div className="footer-top">
           <a className="footer-brand" href="#home" aria-label="الرئيسية">
-            <img src={brandLogo} alt="" />
+            <img src="src/assets/logo-whit.png" alt="" />
           </a>
           <div className="socials">
             <a href="#contact" aria-label="Facebook">
               f
             </a>
             <a href="#contact" aria-label="Instagram">
-              ◎
+             
             </a>
             <a href="#contact" aria-label="LinkedIn">
-              in
+        
             </a>
           </div>
         </div>
         <div className="footer-columns">
-          <div className="vision">
-            <b>رؤية 2030</b>
-            <span>VISION</span>
-          </div>
+        
           <div>
             <h3>المنتجات</h3>
             <a href="#pricing">سحابي VPS</a>
@@ -875,21 +889,41 @@ export default function App() {
             <a href="#pricing">سحابي VDS</a>
             <a href="#pricing">خوادم مخصصة</a>
             <a href="#pricing">عروض الخوادم</a>
+              
+          </div>
+            <div>
+            <h3>المنتجات</h3>
+            <a href="#pricing">سحابي VPS</a>
+            <a href="#pricing">سحابي VDS</a>
+            <a href="#pricing">خوادم مخصصة</a>
+            <a href="#pricing">عروض الخوادم</a>
+              
+          </div>
+
+          <div className="vision">
+       <img
+       src="/src/assets/vision_2030.png"
+       alt="vision 2030"
+         width={120}
+  height={120}/>
           </div>
         </div>
-        <div className="footer-bottom">
-          <span>
-            <Phone size={14} aria-hidden="true" /> +966 50 000 0000
-          </span>
-          <span>
-            <Mail size={14} aria-hidden="true" /> example@gmail.com
-          </span>
-          <span>جميع الحقوق محفوظة © 2026</span>
-          <span>
-            <MapPin size={14} aria-hidden="true" /> المملكة العربية السعودية،
-            مكة المكرمة
-          </span>
-        </div>
+       <div className="footer-bottom">
+  
+<div className="footer-bottom__left">
+    <span><MapPin size={14} aria-hidden="true" /> المملكة العربية السعودية، مكة المكرمة</span>
+  </div>
+
+  <div className="footer-bottom__center">
+    <span>جميع الحقوق محفوظة © 2026</span>
+  </div>
+
+  
+  <div className="footer-bottom__right">
+    <span> +966 50 000 0000 <Phone size={14} aria-hidden="true" /></span>
+    <span>example@gmail.com <Mail size={14} aria-hidden="true" /> </span>
+  </div>
+</div>
       </footer>
     </div>
   );
