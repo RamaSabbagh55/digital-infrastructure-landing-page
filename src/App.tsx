@@ -717,37 +717,41 @@ export default function App() {
           <CoverageMap />
           <div className="stats-grid">
             <article>
-              <span className="stat-icon">
+           
+              <strong className=" flex flex-row gap-1.5">
+                <Counter value={500} /> <span> +</span>
+              </strong>
+                 <span className="stat-icon">
                 <UserGroup size={20} strokeWidth={3} aria-hidden="true" />
               </span>
-              <strong>
-                + <Counter value={500} />
-              </strong>
               <small>عميل مشترك في المنصة التقنية</small>
             </article>
             <article>
-              <span className="stat-icon">
-                <AlarmClock size={20} strokeWidth={3} aria-hidden="true" />
-              </span>
+            
               <strong>
                 <Counter value={100} suffix="%" />
               </strong>
+                <span className="stat-icon">
+                <AlarmClock size={20} strokeWidth={3} aria-hidden="true" />
+              </span>
               <small>وقت تشغيل المنصة</small>
             </article>
             <article>
-              <span className="stat-icon">
+            
+              <strong>24/7</strong>
+                <span className="stat-icon">
                 <Headset size={20} strokeWidth={3} aria-hidden="true" />
               </span>
-              <strong>24/7</strong>
               <small>الدعم الفني</small>
             </article>
             <article>
-              <span className="stat-icon">
+             
+              <strong className="flex flex-row  gap-2 ">
+                 <Counter value={15}  /> <span> +</span>
+              </strong>
+               <span className="stat-icon">
                 <Landmark size={20} strokeWidth={3} aria-hidden="true" />
               </span>
-              <strong>
-                + <Counter value={15} />
-              </strong>
               <small>سنـــــوات الخبـــــرة</small>
             </article>
           </div>
