@@ -25,7 +25,6 @@ import n8nLogo from "./assets/orbit-n8n-mark.png";
 import openClawLogo from "./assets/orbit-openclaw-mark.png";
 import hostGlobe from "./assets/host-globe.png";
 import saudiRiyalSymbol from "./assets/saudi-riyal-symbol.png";
-import brandLogo from "./assets/logo-rtl.png";
 import { ArrowLeft } from "lucide-react";
 const topology = worldData as any;
 const countryFeatures = feature(topology, topology.objects.countries).features;
