@@ -4,7 +4,8 @@
   }
   .hero-copy {
     order: 0;
-    justify-self: start;
+    justify-self: start !important;
+    text-align: right;
   }
   .orbit-scene {
     order: 1;
@@ -339,6 +340,13 @@ body,
     padding-inline: 18px;
   }
   .hero-copy h1 {
+    width: 100%;
+    align-self: stretch;
+    text-align: right;
+  }
+  .hero-copy p {
+    width: 100%;
+    align-self: stretch;
     text-align: right;
   }
   .feature-heading {
@@ -629,7 +637,7 @@ body,
   }
   .hero-copy h1 {
     order: 0;
-    
+
   }
   .hero-copy p {
     order: 1;
@@ -683,6 +691,21 @@ body,
 }
 
 @media (max-width: 700px) {
+  /* Keep every orbit logo at the compact visual scale of orbit-image-7. */
+  .orbit-badge-anchor {
+    width: 40px;
+    height: 40px;
+  }
+  .orbiting-element .orbit-badge {
+    width: 100%;
+    height: 100%;
+  }
+  .orbiting-element .orbit-badge img {
+    width: 78%;
+    height: 78%;
+    object-fit: contain;
+  }
+
   .plan-row {
     overflow-x: auto;
     overflow-y: hidden;

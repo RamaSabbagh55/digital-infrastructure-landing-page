@@ -820,8 +820,8 @@ export default function App() {
         <section id="faq" className="faq-section scroll-reveal">
           <div className="faq-title">
             <h2>
-              الأسئلــــــة
-              <br />
+             {""} الأسئلــــــة
+               {""} <br />
               <span>الشائـعـــة؟</span>
             </h2>
           </div>
