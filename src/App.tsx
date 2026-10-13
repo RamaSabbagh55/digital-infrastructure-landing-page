@@ -872,6 +872,7 @@ export default function App() {
         <div className="footer-columns">
         
           <div>
+            
             <h3>المنتجات</h3>
             <a href="#pricing">سحابي VPS</a>
             <a href="#pricing">سحابي VDS</a>
@@ -916,6 +917,9 @@ export default function App() {
          width={120}
   height={120}/>
           </div>
+        </div>
+        <div className="vision-mobile" aria-hidden="true">
+          <img src={vision2030} alt="" width={120} height={120} />
         </div>
        <div className="footer-bottom">
   

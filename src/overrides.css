@@ -71,7 +71,7 @@ body,
 
 .section-title,
 .section-title .gradient-text,
-.feature-heading,
+
 .faq-title h2 {
   font-size: 47px;
 }
@@ -329,9 +329,17 @@ body,
     row-gap: 24px;
   }
 }
+@media (max-width: 1024px) {
+  .feature-heading::before {
+    display: none;
+  }
+}
 @media (max-width: 700px) {
   .hero-section {
     padding-inline: 18px;
+  }
+  .hero-copy h1 {
+    text-align: right;
   }
   .feature-heading {
     margin-bottom: 11px;
@@ -503,9 +511,27 @@ body,
 .nav-links a[href="#coverage"] {
   margin-inline-start: 14px;
 }
+.vision-mobile {
+  display: none;
+}
 @media (max-width: 700px) {
   .nav-links a[href="#coverage"] {
     margin-inline-start: 0;
+  }
+  .footer-columns > .vision {
+    display: none;
+  }
+  .vision-mobile {
+    display: flex;
+    justify-content: center;
+    margin-top: 18px;
+    margin-bottom: 2px;
+  }
+  .vision-mobile img {
+    display: block;
+    width: 112px;
+    height: 112px;
+    object-fit: contain;
   }
   .footer-bottom {
     display: flex;
@@ -603,6 +629,7 @@ body,
   }
   .hero-copy h1 {
     order: 0;
+    
   }
   .hero-copy p {
     order: 1;

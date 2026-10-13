@@ -1,6 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800&display=swap");
 @import "tailwindcss";
 
+@font-face {
+  font-family: "The Year of Handicrafts";
+  src: url("./assets/TheYearofHandicrafts-Black.otf") format("opentype");
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+
 :root {
   font-family: "IBM Plex Sans Arabic", "Tajawal", sans-serif;
   color: #14181c;
@@ -121,12 +129,13 @@ button {
   order: 1;
 }
 .hero-copy h1 {
-  font-family: "Tajawal", "IBM Plex Sans Arabic", sans-serif;
+  font-family: "The Year of Handicrafts", "IBM Plex Sans Arabic", sans-serif;
   font-size: clamp(40px, 4vw, 60px);
   line-height: 1.26;
   font-weight: 800;
   color: #08090d;
   margin: 0 0 18px;
+  text-align: right;
 }
 .hero-copy h1 span {
   color: var(--navy);
@@ -361,8 +370,9 @@ button {
   position: relative;
   padding-left: 0px;
   text-align: center;
-  font-family: "Tajawal", sans-serif;
-  font-size: 33px;
+  font-family: "The Year of Handicrafts", "IBM Plex Sans Arabic", sans-serif;
+  font-weight: 900;
+  font-size: 39px;
   font-weight: 600;
   margin: 0;
   color: #111;
@@ -419,6 +429,8 @@ button {
   font-size: 18px;
   font-weight: 800;
   white-space: nowrap;
+   font-family: "The Year of Handicrafts", "IBM Plex Sans Arabic", sans-serif;
+
 }
 .marquee-group b {
   font-size: 21px;
@@ -438,7 +450,7 @@ button {
 }
 .section-title {
   text-align: center;
-  font-family: "Tajawal", "IBM Plex Sans Arabic", sans-serif;
+  font-family: "The Year of Handicrafts", "IBM Plex Sans Arabic", sans-serif;
   font-weight: 800;
   font-size: 38px;
   line-height: 1;
@@ -773,7 +785,7 @@ button {
    font-size: 70px;
 }
 .faq-title h2 {
-  font-family: "Tajawal", sans-serif;
+  font-family: "The Year of Handicrafts", "IBM Plex Sans Arabic", sans-serif;
   line-height: 1.25;
   margin: 0;
       font-weight: 600;
@@ -902,6 +914,9 @@ margin-top: auto;
   }
   .hero-copy h1 {
     font-size: 46px;
+      text-align: right !important;
+
+   
   }
   .feature-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -1169,7 +1184,11 @@ margin-top: auto;
   }
   .vision {
     grid-column: 1/-1;
+    grid-row: 1;
+    order: -1;
     align-items: center;
+    justify-self: stretch;
+    margin-bottom: 4px;
   }
   .footer-bottom {
     font-size: 10px;
