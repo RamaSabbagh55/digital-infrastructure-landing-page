@@ -2,6 +2,9 @@ import { useEffect, useRef, useState, type PointerEvent } from "react";
 import { geoDistance, geoOrthographic, geoPath } from "d3-geo";
 import { feature, mesh } from "topojson-client";
 import worldData from "world-atlas/countries-110m.json";
+import vision2030 from "./assets/vision_2030.png";
+import Check from  "./assets/Check.png"
+
 import {
   ArrowRight,
   Blocks,
@@ -26,6 +29,8 @@ import openClawLogo from "./assets/orbit-openclaw-mark.png";
 import hostGlobe from "./assets/host-globe.png";
 import saudiRiyalSymbol from "./assets/saudi-riyal-symbol.png";
 import { ArrowLeft } from "lucide-react";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 const topology = worldData as any;
 const countryFeatures = feature(topology, topology.objects.countries).features;
 const countryBorders = mesh(
@@ -738,8 +743,7 @@ export default function App() {
                       <li key={s}>
                         <span>
                           <img
-                            src="src/assets/Check.png"
-                            alt=""
+                            src={Check}
                             className="spec-icon"
                           />
                         </span>
@@ -849,13 +853,16 @@ export default function App() {
           </a>
           <div className="socials">
             <a href="#contact" aria-label="Facebook">
-              f
+              <FaFacebookF aria-hidden="true" />
             </a>
             <a href="#contact" aria-label="Instagram">
-             
+              <FaInstagram aria-hidden="true" />
             </a>
             <a href="#contact" aria-label="LinkedIn">
-        
+              <FaLinkedinIn aria-hidden="true" />
+            </a>
+            <a href="#contact" aria-label="Twitter">
+              <FaXTwitter aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -901,7 +908,7 @@ export default function App() {
 
           <div className="vision">
        <img
-       src="/src/assets/vision_2030.png"
+      src={vision2030}
        alt="vision 2030"
          width={120}
   height={120}/>
@@ -919,7 +926,7 @@ export default function App() {
 
   
   <div className="footer-bottom__right">
-    <span> +966 50 000 0000 <Phone size={14} aria-hidden="true" /></span>
+    <span>  000 0000 50 966+ <Phone size={14} aria-hidden="true" /></span>
     <span>example@gmail.com <Mail size={14} aria-hidden="true" /> </span>
   </div>
 </div>
