@@ -768,9 +768,12 @@ button {
   font-size: 12px;
   line-height: 1.8;
 }
+
+.faq-title{
+   font-size: 70px;
+}
 .faq-title h2 {
   font-family: "Tajawal", sans-serif;
-  font-size: 58px;
   line-height: 1.25;
   margin: 0;
       font-weight: 600;
