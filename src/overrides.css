@@ -474,9 +474,13 @@ body,
 }
 .footer-brand img {
   display: block;
-  width: 132px;
+  width: 130px;
   height: auto;
-  filter: brightness(0) invert(1);
+}
+.logo img {
+  display: block;
+  width: 180px;
+  height: auto;
 }
 .socials a {
   display: grid;

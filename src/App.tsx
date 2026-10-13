@@ -4,6 +4,8 @@ import { feature, mesh } from "topojson-client";
 import worldData from "world-atlas/countries-110m.json";
 import vision2030 from "./assets/vision_2030.png";
 import Check from  "./assets/Check.png"
+import Logo from   "./assets/logo-whit.png"
+import Logo2 from   "./assets/logo-rtl.png"
 
 import {
   ArrowRight,
@@ -421,9 +423,10 @@ export default function App() {
   return (
     <div dir="rtl" lang="ar" className="page">
       <header className="site-header">
-        <a className="brand" href="#home" aria-label="الرئيسية">
-          <span className="brand-word">logo</span>
-          <span className="brand-mark">L</span>
+        <a className="logo" href="#home" aria-label="الرئيسية">
+          {/* <span className="brand-word">logo</span>
+          <span className="brand-mark">L</span> */}
+          <img src={Logo2} alt="logo" />
         </a>
         <button
           className="menu-toggle"
@@ -849,7 +852,7 @@ export default function App() {
       <footer id="contact" className="site-footer">
         <div className="footer-top">
           <a className="footer-brand" href="#home" aria-label="الرئيسية">
-            <img src="src/assets/logo-whit.png" alt="" />
+            <img src={Logo} alt="" />
           </a>
           <div className="socials">
             <a href="#contact" aria-label="Facebook">
