@@ -651,15 +651,13 @@ body,
     width: 100%;
     justify-content: center;
     gap: 10px;
+    display:flex;
     margin-top: 22px;
+      flex-direction: column;
+
   }
-  .hero-actions > .gradient-button,
-  .hero-actions > .contact-link {
-    width: calc(50% - 5px);
-    min-width: 0;
-    flex: 0 1 calc(50% - 5px);
-  }
-  .hero-actions .outline-button {
+  
+  .hero-actions .outline-button .gradient-button {
     width: 100%;
     min-width: 0;
   }
@@ -697,8 +695,8 @@ body,
     height: 40px;
   }
   .orbiting-element .orbit-badge {
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
   }
   .orbiting-element .orbit-badge img {
     width: 78%;
